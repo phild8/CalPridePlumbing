@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80">
+  <rect width="220" height="80" rx="14" fill="#5a79ef"/>
+  <g fill="#fff" transform="translate(12,10)">
+    <path d="M50 4l-12 12a18 18 0 1 0 14 14l12-12-14-14z"/>
+    <text x="70" y="28" font-size="24" font-family="Montserrat, Arial, sans-serif" font-weight="800">Cal Pride</text>
+    <text x="70" y="54" font-size="24" font-family="Montserrat, Arial, sans-serif" font-weight="800">Plumbing</text>
+  </g>
+</svg>
