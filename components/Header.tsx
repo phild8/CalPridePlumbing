@@ -1,20 +1,39 @@
-import Link from 'next/link'
-import LogoLockup from './LogoLockup'
+import Link from "next/link";
+import { env } from "@/lib/env.client";
 
 export default function Header() {
+  const tel = `tel:+1${env.phone.replace(/\D/g, "")}`;
   return (
-    <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 bg-white/90 shadow-sm">
-      <div className="section flex items-center justify-between py-3">
-        <Link href="/" className="flex items-center gap-3">
-          <LogoLockup />
+    <header style={{
+      position: "sticky", top: 0, zIndex: 50,
+      background: "rgba(255,255,255,.9)", backdropFilter: "blur(8px)",
+      borderBottom: "1px solid #e5e7eb"
+    }}>
+      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "12px 16px",
+                    display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <Link href="/" className="flex items-center gap-3" style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden>
+            <circle cx="20" cy="20" r="20" fill="#5a79ef"/>
+            <path d="M26 9l-4 4a6 6 0 1 0 5 5l4-4-5-5z" fill="white"/>
+          </svg>
+          <div style={{ lineHeight: 1 }}>
+            <div style={{ fontWeight: 800, color: "#2f4ec2" }}>Cal Pride</div>
+            <div style={{ fontWeight: 800, color: "#2f4ec2", marginTop: -4 }}>Plumbing</div>
+          </div>
         </Link>
-        <nav className="hidden md:flex gap-6 text-sm">
-          <Link href="/services" className="hover:text-brand-700">Services</Link>
-          <Link href="/about" className="hover:text-brand-700">About</Link>
-          <Link href="/contact" className="hover:text-brand-700">Contact</Link>
+        <nav className="hidden md:flex gap-6 text-sm" style={{ display: "flex", gap: 16 }}>
+          <Link href="/services">Services</Link>
+          <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
-        <a href="tel:+19493753457" className="btn-primary ml-4">(949) 375‑3457</a>
+        <a href={tel}
+           style={{
+             borderRadius: 16, background: "#3f61e0", color: "#fff",
+             padding: "10px 16px", fontWeight: 700, textDecoration: "none"
+           }}>
+          {env.phone}
+        </a>
       </div>
     </header>
-  )
+  );
 }
