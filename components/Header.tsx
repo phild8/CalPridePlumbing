@@ -1,14 +1,30 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import { env } from "@/lib/env.client";
 
 export default function Header() {
   const tel = `tel:+1${env.phone.replace(/\D/g, "")}`;
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  // Expose the live header height as a CSS var (handy for anchor offsets, etc.)
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const setH = () =>
+      document.documentElement.style.setProperty("--header-h", `${el.offsetHeight}px`);
+    setH();
+    window.addEventListener("resize", setH);
+    return () => window.removeEventListener("resize", setH);
+  }, []);
 
   return (
     <header
       style={{
         position: "sticky",
-        top: 0,
+        // Sit *below* the blue BannerBar; fallback to 40px if the var isn't set.
+        top: "var(--banner-h, 40px)",
         zIndex: 50,
         background: "rgba(255,255,255,.9)",
         backdropFilter: "blur(8px)",
@@ -16,17 +32,17 @@ export default function Header() {
       }}
     >
       <div
+        ref={wrapRef}
         style={{
           maxWidth: 1120,
           margin: "0 auto",
+          padding: "12px 16px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          paddingTop: 12,
-          paddingBottom: 12,
-          // Safe-area aware horizontal padding to prevent overflow on devices with notches
-          paddingLeft: "max(16px, env(safe-area-inset-left))",
-          paddingRight: "max(16px, env(safe-area-inset-right))",
+          gap: 12,
+          // Let items wrap on small screens so the row doesn't get cramped/overlap.
+          flexWrap: "wrap",
         }}
       >
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -40,15 +56,33 @@ export default function Header() {
           </div>
         </Link>
 
-        <nav style={{ display: "flex", gap: 16 }}>
+        <nav
+          style={{
+            display: "flex",
+            gap: 16,
+            // Prevent long words from causing horizontal scroll on tiny screens.
+            flexWrap: "wrap",
+          }}
+        >
           <Link href="/services">Services</Link>
           <Link href="/about">About</Link>
           <Link href="/projects">Projects</Link>
           <Link href="/contact">Contact</Link>
         </nav>
 
-        {/* Phone pill removed to avoid mobile layout shifts */}
-        {/* If you want it back on desktop only, we can add a desktop-only button later. */}
+        <a
+          href={tel}
+          style={{
+            borderRadius: 16,
+            background: "#3f61e0",
+            color: "#fff",
+            padding: "10px 16px",
+            fontWeight: 700,
+            textDecoration: "none",
+          }}
+        >
+          {env.phone}
+        </a>
       </div>
     </header>
   );
