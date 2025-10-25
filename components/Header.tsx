@@ -43,6 +43,7 @@ export default function Header() {
         <nav style={{ display: "flex", gap: 16 }}>
           <Link href="/services">Services</Link>
           <Link href="/about">About</Link>
+          <Link href="/projects">Projects</Link>
           <Link href="/contact">Contact</Link>
         </nav>
 
