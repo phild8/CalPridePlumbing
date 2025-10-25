@@ -2,8 +2,7 @@ import { env } from "@/lib/env.client";
 
 export default function BannerBar() {
   return (
-    <div className="w-full bg-brand-600 text-white text-center py-2 text-sm"
-         style={{ background: "#3f61e0", color: "#fff" }}>
+    <div style={{ width: "100%", background: "#3f61e0", color: "#fff", textAlign: "center", padding: "8px 0", fontSize: 14 }}>
       LICENSE # <span style={{ fontWeight: 700 }}>{env.license}</span> · Licensed · Bonded · Insured
     </div>
   );

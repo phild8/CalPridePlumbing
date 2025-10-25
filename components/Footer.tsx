@@ -16,7 +16,7 @@ export default function Footer() {
         </div>
         <div>
           <h4 style={{ margin: 0 }}>Contact</h4>
-          <ul style={{ listStyle: "none", padding: 0, margin: "8px 0", color: "#1f2937" }}>
+          <ul style={{ listStyle: "none", padding: 0, margin: "8px 0" }}>
             <li><a href={tel}>{env.phone}</a></li>
             <li><a href={`mailto:${env.email}`}>{env.email}</a></li>
             <li><Link href="/contact">Request service</Link></li>
