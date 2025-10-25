@@ -12,7 +12,10 @@ export default function ContactForm() {
     e.preventDefault();
     setErr(null);
 
-    const fd = new FormData(e.currentTarget);
+    // Capture the form BEFORE any await (React may recycle the event)
+    const form = e.currentTarget as HTMLFormElement;
+
+    const fd = new FormData(form);
     const data = {
       name: String(fd.get("name") ?? "").trim(),
       phone: String(fd.get("phone") ?? "").trim(),
@@ -28,19 +31,19 @@ export default function ContactForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
-        cache: "no-store", // avoid any caching shenanigans
+        cache: "no-store", // avoid caching
       });
 
       let json: any = null;
       try {
         json = await res.json();
       } catch {
-        // ignore parse errors; treat non-JSON as success if status OK
+        // Non-JSON responses are treated as success if status is OK
       }
 
       if (res.ok && (!json || json.ok !== false)) {
         setStatus("sent");
-        (e.currentTarget as HTMLFormElement).reset();
+        form.reset(); // safe because we captured `form` before await
       } else {
         setStatus("error");
         setErr(json?.error || `Request failed (${res.status})`);
