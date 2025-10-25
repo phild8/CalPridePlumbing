@@ -24,7 +24,7 @@ if (!parsed.success) {
 export const env = {
   phone: (parsed.success && parsed.data.NEXT_PUBLIC_PHONE) || "(949) 375-3457",
   email: (parsed.success && parsed.data.NEXT_PUBLIC_EMAIL) || "calprideplumbing@gmail.com",
-  license: (parsed.success && parsed.data.NEXT_PUBLIC_LICENSE) || "LICENSE_NUMBER_HERE",
+  license: (parsed.success && parsed.data.NEXT_PUBLIC_LICENSE) || "1122931",
   city: (parsed.success && parsed.data.NEXT_PUBLIC_CITY) || "Lake Forest, CA",
   mapsEmbed:
     (parsed.success && parsed.data.NEXT_PUBLIC_GMAPS_EMBED) ||
