@@ -4,7 +4,7 @@ import { Resend } from "resend";
 
 export const runtime = "nodejs"; // ensure Node runtime on Vercel
 
-// Trim all string inputs
+// Trim helper
 const t = (v: unknown) => (typeof v === "string" ? v.trim() : v);
 
 // Validate + normalize payload
@@ -24,10 +24,9 @@ export async function POST(req: Request) {
     const parsed = schema.safeParse(data);
 
     if (!parsed.success) {
-      // Optional: include issues for debugging (comment out if you prefer)
       return NextResponse.json(
         { ok: false, error: "Invalid form", issues: parsed.error.flatten() },
-        { status: 400 }
+        { status: 400, headers: { "cache-control": "no-store" } }
       );
     }
 
@@ -35,12 +34,12 @@ export async function POST(req: Request) {
 
     const resendKey = process.env.RESEND_API_KEY;
     const to = process.env.CONTACT_TO || "calprideplumbing@gmail.com";
-    // Use Resend's onboarding sender by default to avoid domain verification issues
+    // Use Resend onboarding sender until your domain is verified:
     const from = process.env.CONTACT_FROM || "onboarding@resend.dev";
 
     if (!resendKey) {
       console.log("Contact request (no email configured):", { name, phone, email, city, message });
-      return NextResponse.json({ ok: true });
+      return NextResponse.json({ ok: true }, { headers: { "cache-control": "no-store" } });
     }
 
     const resend = new Resend(resendKey);
@@ -50,8 +49,7 @@ export async function POST(req: Request) {
         to,
         from,
         subject: `New service request from ${name}`,
-        // If you later verify a domain and want "reply-to", this works with Resend:
-        reply_to: email, // omit when undefined
+        reply_to: email,
         text:
           `Name: ${name}\n` +
           `Phone: ${phone}\n` +
@@ -60,13 +58,16 @@ export async function POST(req: Request) {
           `Message:\n${message}`,
       } as any);
     } catch (err: any) {
-      // Don't break UX — log for you, still return ok
       console.error("Resend send failed:", err?.message || err);
+      // Do not fail the user experience if email fails:
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true }, { headers: { "cache-control": "no-store" } });
   } catch (err: any) {
     console.error("Contact route error:", err?.message || err);
-    return NextResponse.json({ ok: false, error: "Server error" }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, error: "Server error" },
+      { status: 500, headers: { "cache-control": "no-store" } }
+    );
   }
 }
