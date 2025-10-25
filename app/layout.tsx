@@ -22,16 +22,16 @@ export const metadata: Metadata = {
   metadataBase: metadataBaseSafe,
   title: {
     default: "Cal Pride Plumbing — Lake Forest, CA",
-    template: "%s · Cal Pride Plumbing"
+    template: "%s · Cal Pride Plumbing",
   },
   description: `Friendly, professional plumbing in Orange County. Honest pricing, fast response. Call ${client.phone}.`,
   openGraph: {
     title: "Cal Pride Plumbing",
     description: "Orange County plumber. Licensed · Bonded · Insured.",
     type: "website",
-    locale: "en_US"
+    locale: "en_US",
   },
-  robots: { index: true, follow: true }
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -42,6 +42,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
+
+        {/* Prevent any accidental horizontal scrolling/jitter across the site */}
+        <style jsx global>{`
+          html,
+          body {
+            overflow-x: hidden;
+          }
+        `}</style>
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
