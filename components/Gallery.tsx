@@ -9,16 +9,13 @@ export default function Gallery({ photos }: { photos: Photo[] }) {
   const [open, setOpen] = useState(false);
   const [idx, setIdx] = useState(0);
 
-  const openAt = (i: number) => { setIdx(i); setOpen(true); };
+  const openAt = (i: number) => {
+    setIdx(i);
+    setOpen(true);
+  };
   const close = useCallback(() => setOpen(false), []);
-  const prev = useCallback(
-    () => setIdx(i => (i - 1 + photos.length) % photos.length),
-    [photos.length]
-  );
-  const next = useCallback(
-    () => setIdx(i => (i + 1) % photos.length),
-    [photos.length]
-  );
+  const prev = useCallback(() => setIdx((i) => (i - 1 + photos.length) % photos.length), [photos.length]);
+  const next = useCallback(() => setIdx((i) => (i + 1) % photos.length), [photos.length]);
 
   // Keyboard + scroll lock while lightbox is open
   useEffect(() => {
@@ -31,17 +28,20 @@ export default function Gallery({ photos }: { photos: Photo[] }) {
     document.addEventListener("keydown", onKey);
     const orig = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = orig; };
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = orig;
+    };
   }, [open, close, prev, next]);
 
   return (
     <>
-      {/* Grid */}
-      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Grid (stop items from stretching to the tallest row) */}
+      <div className="mt-6 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {photos.map((p, i) => (
           <figure
             key={p.src}
-            className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-soft"
+            className="self-start rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-soft"
           >
             <button
               onClick={() => openAt(i)}
@@ -83,14 +83,20 @@ export default function Gallery({ photos }: { photos: Photo[] }) {
 
           <button
             aria-label="Previous image"
-            onClick={(e) => { e.stopPropagation(); prev(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              prev();
+            }}
             className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/80 px-3 py-2 font-bold shadow"
           >
             ‹
           </button>
           <button
             aria-label="Next image"
-            onClick={(e) => { e.stopPropagation(); next(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              next();
+            }}
             className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/80 px-3 py-2 font-bold shadow"
           >
             ›
