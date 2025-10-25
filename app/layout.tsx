@@ -42,15 +42,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
-
-        {/* Prevent any accidental horizontal scrolling/jitter across the site */}
-        <style jsx global>{`
-          html,
-          body {
-            overflow-x: hidden;
-          }
-        `}</style>
-
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

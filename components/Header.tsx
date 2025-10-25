@@ -5,8 +5,30 @@ export default function Header() {
   const tel = `tel:+1${env.phone.replace(/\D/g, "")}`;
 
   return (
-    <header className="cp-header">
-      <div className="cp-row">
+    <header
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        background: "rgba(255,255,255,.9)",
+        backdropFilter: "blur(8px)",
+        borderBottom: "1px solid #e5e7eb",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 1120,
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingTop: 12,
+          paddingBottom: 12,
+          // Safe-area aware horizontal padding to prevent overflow on devices with notches
+          paddingLeft: "max(16px, env(safe-area-inset-left))",
+          paddingRight: "max(16px, env(safe-area-inset-right))",
+        }}
+      >
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden>
             <circle cx="20" cy="20" r="20" fill="#5a79ef" />
@@ -24,53 +46,9 @@ export default function Header() {
           <Link href="/contact">Contact</Link>
         </nav>
 
-        {/* Phone pill — hidden on small screens to avoid horizontal jiggle */}
-        <a href={tel} className="cp-phoneChip">
-          {env.phone}
-        </a>
+        {/* Phone pill removed to avoid mobile layout shifts */}
+        {/* If you want it back on desktop only, we can add a desktop-only button later. */}
       </div>
-
-      {/* Scoped CSS (styled-jsx) */}
-      <style jsx>{`
-        .cp-header {
-          position: sticky;
-          top: 0;
-          z-index: 50;
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(8px);
-          border-bottom: 1px solid #e5e7eb;
-        }
-        .cp-row {
-          max-width: 1120px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          /* Safe-area aware horizontal padding to prevent overflow on devices with notches */
-          padding-top: 12px;
-          padding-bottom: 12px;
-          padding-left: max(16px, env(safe-area-inset-left));
-          padding-right: max(16px, env(safe-area-inset-right));
-        }
-        .cp-phoneChip {
-          border-radius: 16px;
-          background: #3f61e0;
-          color: #fff;
-          padding: 10px 16px;
-          font-weight: 700;
-          text-decoration: none;
-          white-space: nowrap; /* prevent wrapping */
-          max-width: 92vw; /* ensure it never forces horizontal scroll */
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        /* Hide the phone pill on small screens to eliminate side-to-side movement */
-        @media (max-width: 768px) {
-          .cp-phoneChip {
-            display: none;
-          }
-        }
-      `}</style>
     </header>
   );
 }
