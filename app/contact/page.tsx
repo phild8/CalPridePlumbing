@@ -15,7 +15,7 @@ export default function ContactPage() {
             <li>Lake Forest, CA</li>
             <li>Email: <a className="text-brand-700" href="mailto:calprideplumbing@gmail.com">calprideplumbing@gmail.com</a></li>
             <li>Phone: <a className="text-brand-700" href="tel:+19493753457">(949) 375‑3457</a></li>
-            <li>License: LIC# LICENSE_NUMBER_HERE</li>
+            <li>License: LIC# 1122931</li>
           </ul>
         </div>
       </div>
