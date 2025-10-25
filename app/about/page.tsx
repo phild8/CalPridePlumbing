@@ -10,7 +10,7 @@ export default function AboutPage() {
         it’s a quick leak repair or a full repipe.
       </p>
       <ul className="mt-6 grid md:grid-cols-2 gap-4">
-        <li className="rounded-2xl bg-white p-6 border border-slate-200">Licensed, bonded, and insured (LIC# LICENSE_NUMBER_HERE).</li>
+        <li className="rounded-2xl bg-white p-6 border border-slate-200">Licensed, bonded, and insured (LIC# 1122931).</li>
         <li className="rounded-2xl bg-white p-6 border border-slate-200">Serving Lake Forest and the greater Orange County area.</li>
         <li className="rounded-2xl bg-white p-6 border border-slate-200">Up‑front pricing with options to fit your budget.</li>
         <li className="rounded-2xl bg-white p-6 border border-slate-200">Respect for your home — shoe covers and spotless cleanup.</li>
