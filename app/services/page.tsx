@@ -1,9 +1,9 @@
 export const metadata = { title: 'Services' }
 
 const services = [
-  { title: 'Leak detection & repair', desc: 'Pinpoint leaks in walls, ceilings, and slabs; repair lines and fixtures.' },
+  { title: 'Leak repair', desc: 'Repair leaks in walls, ceilings, slabs, lines, and fixtures.' },
   { title: 'Water heaters', desc: 'Install & service tank or tankless systems; flushes, anode rods, pilot & ignition.' },
-  { title: 'Drain cleaning', desc: 'Clogs, slow drains, hydro‑jetting, root intrusions, camera inspections.' },
+  { title: 'Drain cleaning', desc: 'Clogs and slow drains.' },
   { title: 'Toilets & faucets', desc: 'New installs, rebuilds, cartridges, wax rings, shutoff valves.' },
   { title: 'Repipes & valves', desc: 'Copper, PEX, main shutoff, PRV, angle stops; whole‑home upgrades.' },
   { title: 'Garbage disposals', desc: 'New installs, jams, leaks & replacements.' },
