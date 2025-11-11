@@ -47,7 +47,7 @@ export default function HomePage() {
           <div className="rounded-2xl bg-white p-6 border border-slate-200">
             <Badge>Licensed · Bonded · Insured</Badge>
             <p className="mt-2 text-slate-700">
-              LIC# LICENSE_NUMBER_HERE — work done to code with permits as required.
+              LIC# 1122931 — work done to code with permits as required.
             </p>
           </div>
           <div className="rounded-2xl bg-white p-6 border border-slate-200">
