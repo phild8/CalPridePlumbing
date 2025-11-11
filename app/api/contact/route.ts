@@ -11,9 +11,7 @@ const t = (v: unknown) => (typeof v === "string" ? v.trim() : v);
 const schema = z.object({
   name: z.preprocess(t, z.string().min(1, "Name is required")),
   phone: z.preprocess(t, z.string().min(3, "Phone is required")),
-  email: z
-    .preprocess(t, z.string().email().optional())
-    .or(z.literal("").transform(() => undefined)),
+  email: z.preprocess(t, z.string().email().optional()).or(z.literal("").transform(() => undefined)),
   city: z.preprocess(t, z.string().optional()),
   message: z.preprocess(t, z.string().min(1, "Message is required")),
 });
@@ -33,8 +31,9 @@ export async function POST(req: Request) {
     const { name, phone, email, city, message } = parsed.data;
 
     const resendKey = process.env.RESEND_API_KEY;
-    const to = process.env.CONTACT_TO || "calprideplumbing@gmail.com";
-    // Use Resend onboarding sender until your domain is verified:
+    // HARD-CODED test recipient:
+    const to = "pjsdavs@gmail.com";
+    // Use Resend onboarding sender by default to avoid domain verification issues
     const from = process.env.CONTACT_FROM || "onboarding@resend.dev";
 
     if (!resendKey) {
