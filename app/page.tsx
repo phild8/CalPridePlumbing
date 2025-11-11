@@ -17,12 +17,10 @@ export default function HomePage() {
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[
+            ["Leak repair (walls, ceilings, fixtures, lines)", <Wrench key="leak" className="h-6 w-6" />],
             ["Water heaters (tank & tankless)", <Wrench key="w" className="h-6 w-6" />],
             ["Natural gas lines — install & pressure test", <Wrench key="gas" className="h-6 w-6" />],
-            [
-              "Remodels — kitchens, bathrooms, whole-home & ADUs",
-              <Wrench key="remodel" className="h-6 w-6" />,
-            ],
+            ["Remodels — kitchens, bathrooms, whole-home & ADUs", <Wrench key="remodel" className="h-6 w-6" />],
             ["Toilets, faucets, fixtures", <Wrench key="fixtures" className="h-6 w-6" />],
             ["Repipes & valves", <Wrench key="repipes" className="h-6 w-6" />],
           ].map(([label, icon]) => (
